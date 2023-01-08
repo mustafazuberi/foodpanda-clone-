@@ -2,13 +2,54 @@ import React, { useEffect, useState } from 'react'
 import logo from './../Foodpanda-Logo.png'
 import './style.css'
 
+import { auth } from "../config/firebase"
+
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
+
+import { useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import actionCreators from "./../state/index"
+
 
 const Navbar = () => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const { authData, isAuthenticatedData } = bindActionCreators(actionCreators, dispatch)
+
+    const userData = useSelector(state => state.myAuth)
+    const authenticated = useSelector(state => state.myAuthLoggined)
 
 
 
-    let [loginOptionDisplay, setLoginOptionDisplay] = useState("Cart-and-Login")
+
+
+
+    const logout = async () => {
+        auth.signOut();
+        const user = auth.currentUser;
+        authData(user)
+        isAuthenticatedData(false)
+        // setLoginOptionDisplay("Cart-and-Login d-none")
+        Swal.fire({
+            title: 'Congrats! Logged Out Successfully.',
+            width: 600,
+            padding: '3em',
+            color: '#e21b70',
+            backdrop: `#ffeaf2 left top no-repeat`
+        })
+        navigate("/")
+    }
+
+
+
+    // let [loginOptionDisplay, setLoginOptionDisplay] = useState("Cart-and-Login")
+
+
+
+
+
 
 
 
@@ -16,11 +57,17 @@ const Navbar = () => {
 
         <div className="mynavbar ">
             <div className="logoDiv"><img src={logo} className='logo-foodpanda' alt="" /></div>
-            <div id="Cart-and-Login" className={loginOptionDisplay} >
+            <div id="Cart-and-Login" className={authenticated === false ? "Cart-and-Login d-none" : "Cart-and-Login"} >
 
-                <div className="login">
-                    <div className="loginBtn mx-2"><i className="fas fa-user" ></i></div>
-                    <div className='loginText'>Login <i className="fas fa-caret-down mx-2"></i></div>
+                <div className="login dropdown " href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    <div className="loginBtn mx-2" ><i className="fas fa-user" ></i></div>
+                    <div className='loginText'>{authenticated === false ? " " : userData.currentUser.displayName || userData.currentUser.email} <i className="fas fa-caret-down mx-2" ></i></div>
+                    {/* authData.currentUser.displayName || authData.currentUser.displayName */}
+                    <div className="dropdown-menu " aria-labelledby="dropdownMenuLink">
+                        <a className="dropdown-item" >My Profile</a>
+                        <a className="dropdown-item" >Settings</a   >
+                        <a className="dropdown-item" onClick={logout} >Logout</a>
+                    </div>
                 </div>
 
                 <div className="CartBtn"><i className="fas fa-shopping-basket"></i></div>

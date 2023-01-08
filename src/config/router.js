@@ -12,7 +12,7 @@ import {
 } from "react-router-dom";
 
 const Router = () => {
-  
+
 
   const router = createBrowserRouter([
     {
@@ -25,20 +25,19 @@ const Router = () => {
     },
     {
       path: "/",
-      element: <LoginUser/>,
+      element: <LoginUser />,
     },
     {
       path: "/loginWithEmail",
-      element: <LoginUserForm/>,
+      element: <LoginUserForm />,
     },
     {
       path: "/signupWithEmail",
-      element: <SignupUserForm/>,
+      element: <SignupUserForm />,
     },
   ]);
   return (
     <div>
-
       <RouterProvider router={router} />
 
     </div>

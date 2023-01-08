@@ -12,7 +12,7 @@ import {
   FacebookAuthProvider
 } from "../../config/firebase";
 
-
+import Navbar from '../../components/Navbar';
 
 import { useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom";
@@ -63,10 +63,9 @@ const LoginUser = () => {
 
   return (
     <div>
+      <Navbar />
+
       <div className="loginOptionsDiv">
-
-
-
         <h2 className='welcomeHeading'>Welcome!</h2>
         <h3 className='welcomDesc'>Sign up or log in to continue</h3>
         <button onClick={signInGoogle} className="contWithGoogleBtn mt-5" >

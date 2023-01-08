@@ -3,6 +3,8 @@ import './style.css'
 
 import { useState, useEffect } from 'react';
 
+import Navbar from '../../components/Navbar';
+
 import { useNavigate } from "react-router-dom";
 
 import { TextField } from '@mui/material';
@@ -65,14 +67,17 @@ const Index = () => {
 
 
     return (
-        <div className='loginUserForm'>
-            <h1>Sign up Here</h1>
-            <TextField id="userName" label="Enter Your username" type="email" variant="outlined" className='signupFormInps ' />
-            <TextField id="email" label="Enter Your Email" type="email" variant="outlined" className='signupFormInps mt-4 ' />
-            <TextField id="psw" label="Enter Your Passsword" type="password" variant="outlined" className='signupFormInps mt-4 ' />
-            <button className="login-Btn loginBtnLoginForm" style={{ marginTop: "80px" }} onClick={signupFirebase}>Sign up</button>
+        <>
+            <Navbar />
+            <div className='loginUserForm'>
+                <h1>Sign up Here</h1>
+                <TextField id="userName" label="Enter Your username" type="email" variant="outlined" className='signupFormInps ' />
+                <TextField id="email" label="Enter Your Email" type="email" variant="outlined" className='signupFormInps mt-4 ' />
+                <TextField id="psw" label="Enter Your Passsword" type="password" variant="outlined" className='signupFormInps mt-4 ' />
+                <button className="login-Btn loginBtnLoginForm" style={{ marginTop: "80px" }} onClick={signupFirebase}>Sign up</button>
 
-        </div>
+            </div>
+        </>
     )
 }
 

@@ -9,6 +9,8 @@ import { signInWithEmailAndPassword, auth, addUserToDBSignup } from './../../con
 
 import Swal from 'sweetalert2';
 
+import Navbar from '../../components/Navbar';
+
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actionCreators from "./../../state/index"
@@ -49,15 +51,18 @@ const Index = () => {
 
 
     return (
-        <div className='loginUserForm'>
+        <>
+            <Navbar />
+            <div className='loginUserForm'>
 
-            <h1>Log in by typing your email & password.</h1>
-            <TextField id="email" label="Enter Your Email" type="email" variant="outlined" className='loginFormInps' />
-            <TextField id="psw" label="Enter Your Passsword" type="password" variant="outlined" className='loginFormInps loginFormInpsPsw' />
+                <h1>Log in by typing your email & password.</h1>
+                <TextField id="email" label="Enter Your Email" type="email" variant="outlined" className='loginFormInps' />
+                <TextField id="psw" label="Enter Your Passsword" type="password" variant="outlined" className='loginFormInps loginFormInpsPsw' />
 
-            <button className="login-Btn loginBtnLoginForm" style={{ marginTop: '100px' }} onClick={signInWithEmail}>Log in</button>
+                <button className="login-Btn loginBtnLoginForm" style={{ marginTop: '100px' }} onClick={signInWithEmail}>Log in</button>
 
-        </div>
+            </div>
+        </>
     )
 }
 

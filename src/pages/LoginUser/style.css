@@ -43,7 +43,7 @@
     border: none;
     color: grey;
     font-size: 18px;
-    font-weight: 900;
+    font-weight: 600;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: flex;
     flex-direction: row;
@@ -113,7 +113,7 @@
 
 .pink {
     color: #e21b70;
-    font-weight: 900;
+    font-weight: 300;
 }
 
 .loginNote {
