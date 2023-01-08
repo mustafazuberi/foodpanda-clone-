@@ -9,7 +9,6 @@
 //       url("/images/nyan-cat.gif")
 //       left top
 //       no-repeat
-//     `
 //   })
 
 // Firebase
@@ -19,7 +18,9 @@ import {
     signInWithPopup,
     GoogleAuthProvider,
     onAuthStateChanged,
-    FacebookAuthProvider
+    FacebookAuthProvider,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
 import {
     getFirestore,
@@ -56,13 +57,45 @@ const signInGoogle = async () => {
         var provider = new GoogleAuthProvider();
         const result = await auth;
         await signInWithPopup(auth, provider);
-        //   await addUserToDB();
+        console.log('before sending')
+        // await addUserToDB();
+        console.log('after sending')
         await swal("Congratulations!", "Loggined successfully!", "success");
-        localStorage.setItem("auth", JSON.stringify(auth))
     } catch (e) {
         console.log(e.message);
     }
 };
+
+
+
+
+// adding users to database
+const addUserToDB = async () => {
+    const uid = auth.currentUser.uid;
+    var userProfile = { email: "", name: "", photoUrl: "" };
+    userProfile.email = auth.currentUser.email;
+    userProfile.name = auth.currentUser.displayName;
+    userProfile.photoUrl = auth.currentUser.photoURL;
+
+    return setDoc(doc(db, "users", uid), userProfile);
+};
+
+
+const addUserToDBSignup = async (userName) => {
+    const uid = auth.currentUser.uid;
+    var userProfile = { email: "", name: "", photoUrl: "" };
+    userProfile.email = auth.currentUser.email;
+    userProfile.name = userName;
+    userProfile.photoUrl = auth.currentUser.photoURL;
+
+    return setDoc(doc(db, "users", uid), userProfile);
+};
+
+
+
+
+
+
 
 
 // Auth Keep loggined
@@ -91,13 +124,16 @@ export {
     auth,
     db,
     FacebookAuthProvider,
-    // addUserToDB,
+    addUserToDB,
     addDoc,
     collection,
     getStorage, ref, uploadBytes, getDownloadURL,
     storage,
     onSnapshot, where, query, getDoc, getDocs,
-    signInGoogle
+    signInGoogle,
+    createUserWithEmailAndPassword,
+    addUserToDBSignup,
+    signInWithEmailAndPassword,
 
-};
+}
 

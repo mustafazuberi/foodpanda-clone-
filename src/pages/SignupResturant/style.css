@@ -1,0 +1,157 @@
+.resturanFormMain {
+    background-image: url('./new_bg.jpg');
+    width: 100%;
+    height: 150vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    box-shadow: rgba(50, 50, 93, 0.25) 1900px 30px 60px -12px inset, black 0px 18px 36px -18px inset;
+}
+
+.resturanFormSection {
+    background-color: white;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    width: 38%;
+    height: 90%;
+    margin-top: 20px;
+
+}
+
+.partnerwithUsSection {
+    width: 30%;
+    color: white;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 600;
+    text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 90%;
+}
+
+.partnerwithUsSection p {
+    font-size: 18px;
+    font-family: sans-serif;
+}
+
+.resturanFormSection h2 {
+    color: #3f3f3f;
+    font-size: 23px;
+    text-align: center;
+    width: 80%;
+    margin: 40px auto;
+    font-weight: 900;
+
+}
+
+.restFormInpDiv {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.restFormInpDiv .restFormInp {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.restSubmit {
+    width: 90%;
+    display: block;
+    margin: 30px auto;
+    padding: 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: white;
+    background-color: #d70f64;
+    border: none;
+}
+
+.restSubmit:hover {
+    background-color: #f82d82;
+    transition: 0.3s;
+}
+
+@media only screen and (max-width : 995px) {
+    .partnerwithUsSection {
+        width: 27%;
+    }
+
+    .resturanFormSection {
+        height: 100%;
+        margin-top: 10px;
+    }
+}
+
+@media only screen and (max-width : 1240px) {
+    .resturanFormSection {
+        height: 96%;
+    }
+}
+
+@media only screen and (max-width : 980px) {
+    .resturanFormMain {
+        flex-direction: column;
+        height: 230vh;
+    }
+
+    .resturanFormSection {
+        width: 100%;
+        /* height: 100vh;
+        border: 6px solid black; */
+    }
+
+    .partnerwithUsSection {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+.restPageFooter {
+    width: 100%;
+    padding: 40px;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* margin-top: 100px; */
+}
+
+.restPageFooter h2 {
+    color: white;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.restPageFooter .footerLeft {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-around;
+}
+
+.restPageFooter .footerRight {
+    width: 26%;
+}
+
+.restFooterIcon {
+    margin-right: 20px;
+    color: white;
+}
+
+
+@media only screen and (max-width : 720px) {
+    .restPageFooter {
+        flex-direction: column;
+    }
+    .restPageFooter .footerRight{
+        width: 100%;
+        margin-top: 20px;
+        text-align: center;
+    }
+    .restPageFooter .footerLeft{
+        width: 100%;
+        text-align: center;
+    }
+}

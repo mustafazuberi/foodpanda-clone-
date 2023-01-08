@@ -1,7 +1,9 @@
 import React from 'react'
 import Home from '../pages/Home'
-import LoginResturant from './../pages/LoginResturant'
+import SignupResturant from '../pages/SignupResturant'
 import LoginUser from '../pages/LoginUser'
+import LoginUserForm from '../pages/LoginUserForm'
+import SignupUserForm from '../pages/SignupUserForm'
 
 
 import {
@@ -18,12 +20,20 @@ const Router = () => {
       element: <Home />,
     },
     {
-      path: "/resturantLogin",
-      element: <LoginResturant />,
+      path: "/SignupResturant",
+      element: <SignupResturant />,
     },
     {
       path: "/",
       element: <LoginUser/>,
+    },
+    {
+      path: "/loginWithEmail",
+      element: <LoginUserForm/>,
+    },
+    {
+      path: "/signupWithEmail",
+      element: <SignupUserForm/>,
     },
   ]);
   return (
