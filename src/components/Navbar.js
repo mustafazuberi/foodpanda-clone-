@@ -19,12 +19,10 @@ const Navbar = () => {
     const { authData, isAuthenticatedData } = bindActionCreators(actionCreators, dispatch)
 
     const userData = useSelector(state => state.myAuth)
+    console.log(userData)
     const authenticated = useSelector(state => state.myAuthLoggined)
 
-
-
-
-
+    console.log(authenticated)
 
     const logout = async () => {
         auth.signOut();
@@ -55,7 +53,7 @@ const Navbar = () => {
 
     return (
 
-        <div className="mynavbar ">
+        <div className="mynavbar">
             <div className="logoDiv"><img src={logo} className='logo-foodpanda' alt="" /></div>
             <div id="Cart-and-Login" className={authenticated === false ? "Cart-and-Login d-none" : "Cart-and-Login"} >
 
@@ -63,10 +61,10 @@ const Navbar = () => {
                     <div className="loginBtn mx-2" ><i className="fas fa-user" ></i></div>
                     <div className='loginText'>{authenticated === false ? " " : userData.currentUser.displayName || userData.currentUser.email} <i className="fas fa-caret-down mx-2" ></i></div>
                     {/* authData.currentUser.displayName || authData.currentUser.displayName */}
-                    <div className="dropdown-menu " aria-labelledby="dropdownMenuLink">
-                        <a className="dropdown-item" >My Profile</a>
-                        <a className="dropdown-item" >Settings</a   >
-                        <a className="dropdown-item" onClick={logout} >Logout</a>
+                    <div className="dropdown-menu profieDropdownopt" aria-labelledby="dropdownMenuLink">
+                        <a className="dropdown-item py-2 px-5 ">My Profile</a>
+                        <a className="dropdown-item py-2 px-5 ">Settings</a   >
+                        <a className="dropdown-item py-2 px-5 " onClick={logout} >Logout</a>
                     </div>
                 </div>
 

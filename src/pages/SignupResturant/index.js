@@ -53,10 +53,12 @@ const LoginResturant = () => {
       const restEmail = document.getElementById("restEmail").value
       const restPsw = document.getElementById("restPsw").value
       const restPhoneNumber = document.getElementById("restPhoneNumber").value
-      const restImage = await uploadImage(document.getElementById("restImage").value)
+      const restImage = await uploadImage(document.getElementById("restImage").files[0])
+      console.log(restImage)
+
 
       let resturantData = { restCountry, restCity, restName, restEmail, restPhoneNumber, restPhoneNumber, restImage }
-      // Validating
+      // // Validating
       for (let a in resturantData) {
         if (resturantData[a].length === 0) {
           Swal.fire('Please fill all Inputs!')
@@ -93,7 +95,7 @@ const LoginResturant = () => {
 
   return (
     <div >
-      <Navbar/>
+      <Navbar />
       <div className='resturanFormMain'>
 
 
@@ -173,17 +175,12 @@ const LoginResturant = () => {
 
 
           {/* upload image btn */}
-          <div className="restFormInpDiv" style={{ marginTop: '110px' }}>
-            <Button variant="contained" component="label">
-              Upload Resturant Image
-              <input hidden accept="image/*" multiple type="file" id='restImage' />
-            </Button>
-            <IconButton color="primary" aria-label="upload picture" component="label">
-              <input hidden accept="image/*" type="file" />
-              <PhotoCamera />
-            </IconButton>
+          <div className="my-5" style={{ width: "90%", margin: "0 auto", top: "50px", position: "relative" }}>
+            <span className="uploadImageHeading">Upload Image</span>
+            <input className="form-control" type="file" id="restImage" />
           </div>
-          <button className="restSubmit" onClick={createResturant}>Submit</button>
+
+          <button className="restSubmit" onClick={createResturant} style={{ top: "40px", position: "relative" }}>Submit</button>
         </div>
 
       </div>

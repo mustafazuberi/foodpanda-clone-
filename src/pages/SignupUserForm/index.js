@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 import { TextField } from '@mui/material';
 
-import { createUserWithEmailAndPassword, auth, addUserToDBSignup } from './../../config/firebase'
+import { createUserWithEmailAndPassword, auth, addUserToDBSignup,} from './../../config/firebase'
 
 import Swal from 'sweetalert2';
 
@@ -24,9 +24,7 @@ const Index = () => {
     const navigate = useNavigate()
 
     const { authData, isAuthenticatedData } = bindActionCreators(actionCreators, dispatch)
-
-
-
+    
 
     const signupFirebase = async () => {
         try {

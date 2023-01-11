@@ -10,6 +10,8 @@
     flex-direction: row;
     justify-content: space-between;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    margin: 0;
+    padding: 0;
 }
 
 .loginBtn {
@@ -72,18 +74,31 @@
 }
 
 @media only screen and (max-width : 900px) {
-    .loginText{
+    .loginText {
         display: none;
     }
-    .CartBtn , .Cart-and-Login{
+
+    .CartBtn,
+    .Cart-and-Login {
         border: none;
     }
-    .loginBtn{
+
+    .loginBtn {
         margin-right: 0px;
     }
-    .login{
+
+    .login {
         padding: 0px;
         padding-top: 25px;
     }
-    
+
+}
+.profieDropdownopt a {
+    color: grey;
+    font-weight: 600;
+    font-size: 16px;
+}
+.profieDropdownopt a:hover {
+    color: #e21b70;
+    transition: 0.2s;
 }

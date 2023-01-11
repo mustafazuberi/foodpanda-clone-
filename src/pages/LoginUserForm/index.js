@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import Navbar from '../../components/Navbar';
 
 import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actionCreators from "./../../state/index"
 
@@ -22,6 +23,7 @@ const Index = () => {
     const navigate = useNavigate()
 
     const { authData, isAuthenticatedData } = bindActionCreators(actionCreators, dispatch)
+
 
 
     const signInWithEmail = async () => {

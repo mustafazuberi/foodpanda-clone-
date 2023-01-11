@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.css'
 import Swal from 'sweetalert2';
-
+import { useState, useEffect, useLayoutEffect } from 'react';
 import {
   getAuth,
   signInWithPopup,
@@ -9,7 +9,10 @@ import {
   swal,
   auth,
   addUserToDB,
-  FacebookAuthProvider
+  FacebookAuthProvider,
+  db,
+  collection,
+  getDocs
 } from "../../config/firebase";
 
 import Navbar from '../../components/Navbar';
@@ -24,11 +27,11 @@ import actionCreators from "./../../state/index"
 
 
 const LoginUser = () => {
-
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { authData, isAuthenticatedData ,sendResturantsData} = bindActionCreators(actionCreators, dispatch)
+  const [resturantsData, setResturantsData] = useState([])
 
-  const { authData, isAuthenticatedData } = bindActionCreators(actionCreators, dispatch)
 
 
   const signInGoogle = async () => {
@@ -51,13 +54,40 @@ const LoginUser = () => {
         no-repeat
         `
       })
-
       // localStorage.setItem("auth", JSON.stringify(auth))
-      navigate('/home')
+      // resturantsData.forEach((item) => {
+      //   if (item.restEmail === auth.currentUser.Email) {
+      //     navigate("/resturantMyProfile")
+      //   } else {
+      //     navigate('/home')
+      //   }
+      // })
+
     } catch (e) {
       console.log(e.message);
     }
   };
+
+  // getting resturants and saving it in redux 
+  useLayoutEffect(() => {
+
+    (async () => {
+      const querySnapshot = await getDocs(collection(db, "Resturants"))
+      const resturants = []
+      querySnapshot.forEach((doc) => {
+        resturants.push({ id: doc.id, ...doc.data() })
+      })
+      console.log(resturants)
+      
+    })();
+
+
+  }, [])
+
+
+
+
+
 
 
 
