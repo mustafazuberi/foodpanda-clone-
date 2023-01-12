@@ -22,8 +22,27 @@ const Index = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const { authData, isAuthenticatedData } = bindActionCreators(actionCreators, dispatch)
+    const { authData, isAuthenticatedData, sendResturantExists } = bindActionCreators(actionCreators, dispatch)
 
+    const resturantsFromRedux = useSelector(state => state.myResturants)
+    let [whereToNavigate, setWhereToNavigate] = useState("")
+
+    const isResturantHandler = (e) => {
+        // console.log(e.target.value)
+        for (let item of resturantsFromRedux) {
+            if (item.restEmail === e.target.value) {
+                console.log("condtion completed")
+                sendResturantExists(true)
+                setWhereToNavigate("/resturantMyProfile")
+                // console.log("isResturant inside " + isResturant)
+                return
+            }
+            else {
+                setWhereToNavigate("/home")
+            }
+        }
+    }
+    const isResturant = useSelector(state => state.myIsResturants)
 
 
     const signInWithEmail = async () => {
@@ -40,7 +59,8 @@ const Index = () => {
                 color: '#e21b70',
                 backdrop: `#ffeaf2 left top no-repeat`
             })
-            navigate('/home')
+
+            navigate(whereToNavigate)
             window.scrollTo(0, 0)
         } catch (e) {
             Swal.fire({
@@ -58,7 +78,7 @@ const Index = () => {
             <div className='loginUserForm'>
 
                 <h1>Log in by typing your email & password.</h1>
-                <TextField id="email" label="Enter Your Email" type="email" variant="outlined" className='loginFormInps' />
+                <TextField id="email" label="Enter Your Email" type="email" variant="outlined" className='loginFormInps' onChange={isResturantHandler} />
                 <TextField id="psw" label="Enter Your Passsword" type="password" variant="outlined" className='loginFormInps loginFormInpsPsw' />
 
                 <button className="login-Btn loginBtnLoginForm" style={{ marginTop: '100px' }} onClick={signInWithEmail}>Log in</button>

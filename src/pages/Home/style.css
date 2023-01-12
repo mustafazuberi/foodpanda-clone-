@@ -48,6 +48,7 @@
 .resturantItem {
   width: 280px;
   height: 290px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
 }
 
 .resturantItem img {
@@ -113,6 +114,7 @@
   .resturantItem {
     width: 240px;
     height: 240px;
+    
   }
   .resturantItem img{
     height: 180px;
@@ -160,4 +162,7 @@
 .resturantImageDiv{
   overflow: hidden;
   overflow-y: hidden;
+}
+.resturantName , .resturantName i{
+  padding-right: 7px;
 }

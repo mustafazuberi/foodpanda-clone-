@@ -29,7 +29,7 @@ import actionCreators from "./../../state/index"
 const LoginUser = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { authData, isAuthenticatedData ,sendResturantsData} = bindActionCreators(actionCreators, dispatch)
+  const { authData, isAuthenticatedData, sendResturantData } = bindActionCreators(actionCreators, dispatch)
   const [resturantsData, setResturantsData] = useState([])
 
 
@@ -78,7 +78,8 @@ const LoginUser = () => {
         resturants.push({ id: doc.id, ...doc.data() })
       })
       console.log(resturants)
-      
+      sendResturantData(resturants)
+
     })();
 
 

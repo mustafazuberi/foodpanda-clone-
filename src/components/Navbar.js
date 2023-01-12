@@ -16,7 +16,7 @@ import actionCreators from "./../state/index"
 const Navbar = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { authData, isAuthenticatedData } = bindActionCreators(actionCreators, dispatch)
+    const { authData, isAuthenticatedData,sendResturantExists } = bindActionCreators(actionCreators, dispatch)
 
     const userData = useSelector(state => state.myAuth)
     console.log(userData)
@@ -29,6 +29,7 @@ const Navbar = () => {
         const user = auth.currentUser;
         authData(user)
         isAuthenticatedData(false)
+        sendResturantExists(false)
         // setLoginOptionDisplay("Cart-and-Login d-none")
         Swal.fire({
             title: 'Congrats! Logged Out Successfully.',
@@ -52,7 +53,6 @@ const Navbar = () => {
 
 
     return (
-
         <div className="mynavbar">
             <div className="logoDiv"><img src={logo} className='logo-foodpanda' alt="" /></div>
             <div id="Cart-and-Login" className={authenticated === false ? "Cart-and-Login d-none" : "Cart-and-Login"} >

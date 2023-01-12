@@ -11,7 +11,9 @@ const Home = () => {
   console.log(userData)
   console.log(useSelector(state => state.myAuthLoggined))
 
+  const resturantsFromRedux =  useSelector(state => state.myResturants)
 
+ 
 
   const toggleStar = (e) => {
     if (e.target.className === "far fa-heart") {
@@ -44,7 +46,7 @@ const Home = () => {
 
   }, [])
 
-  const resturantsToDisplay = resturants.map((item, index) => {
+  const resturantsToDisplay = resturantsFromRedux.map((item, index) => {
     return <div className="resturantItem" key={index} >
       <div className="resturantImageDiv"><img src={item.restImage} alt="" /></div>
       <div className="resturantName">{item.restName}
@@ -71,7 +73,7 @@ const Home = () => {
         <h1>Popular restaurants</h1>
       </div>
 
-      <div className="allResturants" style={{paddingTop:"20px"}}>
+      <div className="allResturants" style={{paddingTop:"20px",paddingBottom:"100px"}}>
         {resturantsToDisplay}
 
       </div>
