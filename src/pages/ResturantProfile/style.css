@@ -1,0 +1,49 @@
+.adItemDiv {
+    width: 90%;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: auto;
+}
+
+.adItemDiv h1 {
+    font-size: 28px;
+    font-family: fantasy;
+}
+
+.addItemBtn,
+.createItemBtn {
+    border-radius: 7px;
+    outline: none;
+    border: none;
+    color: grey;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    background-color: #e21b70;
+    color: white;
+    padding: 0px 30px;
+}
+
+.addItemBtn:hover,
+.createItemBtn:hover {
+    background-color: #ffeaf2;
+    color: #e21b70;
+    transition: 0.25s;
+    border: 1px solid #e21b70;
+}
+
+.addItemModalInp {
+    width: 100%;
+    /* left: 5%; */
+}
+
+.inpDivModalAddItem {
+    margin-top: 30px;
+}
+
+.createItemBtn{
+    padding: 8px 18px;
+    border: 1px solid #e21b70;
+}

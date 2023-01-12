@@ -81,8 +81,6 @@ const LoginUser = () => {
       sendResturantData(resturants)
 
     })();
-
-
   }, [])
 
 

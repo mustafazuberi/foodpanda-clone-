@@ -59,6 +59,8 @@ const Index = () => {
                 color: '#e21b70',
                 backdrop: `#ffeaf2 left top no-repeat`
             })
+            // getting resturants and saving it in redux 
+          
 
             navigate(whereToNavigate)
             window.scrollTo(0, 0)

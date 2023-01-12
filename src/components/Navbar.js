@@ -16,7 +16,7 @@ import actionCreators from "./../state/index"
 const Navbar = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { authData, isAuthenticatedData,sendResturantExists } = bindActionCreators(actionCreators, dispatch)
+    const { authData, isAuthenticatedData, sendResturantExists } = bindActionCreators(actionCreators, dispatch)
 
     const userData = useSelector(state => state.myAuth)
     console.log(userData)
@@ -59,10 +59,10 @@ const Navbar = () => {
 
                 <div className="login dropdown " href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                     <div className="loginBtn mx-2" ><i className="fas fa-user" ></i></div>
-                    <div className='loginText'>{authenticated === false ? " " : userData.currentUser.displayName || userData.currentUser.email} <i className="fas fa-caret-down mx-2" ></i></div>
+                    <div className='loginText'>{authenticated === false ? " " : userData.currentUser.email.split(" ")[0] + "..." || userData.currentUser.email.split(" ")[0] + "..."} <i className="fas fa-caret-down mx-2" ></i></div>
                     {/* authData.currentUser.displayName || authData.currentUser.displayName */}
                     <div className="dropdown-menu profieDropdownopt" aria-labelledby="dropdownMenuLink">
-                        <a className="dropdown-item py-2 px-5 ">My Profile</a>
+
                         <a className="dropdown-item py-2 px-5 ">Settings</a   >
                         <a className="dropdown-item py-2 px-5 " onClick={logout} >Logout</a>
                     </div>

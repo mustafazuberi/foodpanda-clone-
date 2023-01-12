@@ -2,6 +2,8 @@ import React, { useEffect, useState, useLayoutEffect } from 'react'
 import './style.css'
 import { useSelector } from 'react-redux'
 import Navbar from '../../components/Navbar'
+import Footer from '../../components/Footer'
+import AppAndOffice from '../../components/AppAndOffice'
 import test from './home-bg.jpg'
 
 import { doc, getDoc, db, getDocs, collection } from './../../config/firebase'
@@ -11,9 +13,9 @@ const Home = () => {
   console.log(userData)
   console.log(useSelector(state => state.myAuthLoggined))
 
-  const resturantsFromRedux =  useSelector(state => state.myResturants)
+  const resturantsFromRedux = useSelector(state => state.myResturants)
 
- 
+
 
   const toggleStar = (e) => {
     if (e.target.className === "far fa-heart") {
@@ -73,7 +75,7 @@ const Home = () => {
         <h1>Popular restaurants</h1>
       </div>
 
-      <div className="allResturants" style={{paddingTop:"20px",paddingBottom:"100px"}}>
+      <div className="allResturants" style={{ paddingTop: "20px", paddingBottom: "100px" }}>
         {resturantsToDisplay}
 
       </div>
@@ -84,7 +86,8 @@ const Home = () => {
 
 
 
-
+      <AppAndOffice/>
+      <Footer />
     </div>
   )
 }
