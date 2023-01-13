@@ -54,6 +54,9 @@ const Home = () => {
       <div className="resturantName">{item.restName}
         <i className="far fa-heart" onClick={toggleStar} style={{ color: "#e21b70", fontSize: "22px", cursor: "pointer" }}></i>
       </div>
+      <div className='categoryDivHome'>
+        $$Pakistani
+      </div>
     </div>
   })
 
@@ -62,7 +65,6 @@ const Home = () => {
   return (
     <div style={{ width: '100%' }}>
       <div><Navbar /></div>
-
       <div >
         <div className="homeBg">
           <h1>Food and groceries delivery from <span className="pakBold">پاکستان</span></h1>
@@ -86,7 +88,7 @@ const Home = () => {
 
 
 
-      <AppAndOffice/>
+      <AppAndOffice />
       <Footer />
     </div>
   )

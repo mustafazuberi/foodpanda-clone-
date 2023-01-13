@@ -28,7 +28,7 @@ import {
     setDoc,
     addDoc,
     collection,
-    onSnapshot, where, query, getDoc, getDocs
+    onSnapshot, where, query, getDoc, getDocs,DocRef
 } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-storage.js"
 
@@ -134,6 +134,7 @@ export {
     createUserWithEmailAndPassword,
     addUserToDBSignup,
     signInWithEmailAndPassword,
+    DocRef
 
 }
 

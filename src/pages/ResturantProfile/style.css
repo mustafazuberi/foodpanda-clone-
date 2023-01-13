@@ -24,6 +24,8 @@
     background-color: #e21b70;
     color: white;
     padding: 0px 30px;
+    border: 1px solid #e21b70;
+
 }
 
 .addItemBtn:hover,
@@ -45,5 +47,13 @@
 
 .createItemBtn{
     padding: 8px 18px;
-    border: 1px solid #e21b70;
+}
+
+.myResturantItems{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 10px auto;
+    justify-content: space-around;
 }

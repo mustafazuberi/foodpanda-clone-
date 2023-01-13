@@ -54,6 +54,7 @@ const LoginUser = () => {
         no-repeat
         `
       })
+      navigate('/home')
       // localStorage.setItem("auth", JSON.stringify(auth))
       // resturantsData.forEach((item) => {
       //   if (item.restEmail === auth.currentUser.Email) {
