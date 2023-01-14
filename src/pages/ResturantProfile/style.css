@@ -1,10 +1,29 @@
 .adItemDiv {
-    width: 90%;
     margin: 30px auto;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     height: auto;
+    width: 100%;
+    max-width: 100%;
+}
+
+@media only screen and (max-width : 410px) {
+    .adItemDiv {
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .adItemDiv h1 {
+        text-align: center;
+    }
+
+    .addItemBtn {
+        width: 90%;
+        margin: 0 auto;
+
+    }
 }
 
 .adItemDiv h1 {
@@ -45,11 +64,11 @@
     margin-top: 30px;
 }
 
-.createItemBtn{
+.createItemBtn {
     padding: 8px 18px;
 }
 
-.myResturantItems{
+.myResturantItems {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

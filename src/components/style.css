@@ -780,3 +780,8 @@ footer {
     text-decoration: none;
     background-color: #f8f9fa;
   }
+
+  .price{
+    color: #212529;
+    margin-left: 15px;
+  }

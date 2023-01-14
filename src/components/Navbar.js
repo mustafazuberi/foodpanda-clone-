@@ -19,10 +19,10 @@ const Navbar = () => {
     const { authData, isAuthenticatedData, sendResturantExists } = bindActionCreators(actionCreators, dispatch)
 
     const userData = useSelector(state => state.myAuth)
-    console.log(userData)
+    // console.log(userData)
     const authenticated = useSelector(state => state.myAuthLoggined)
 
-    console.log(authenticated)
+    // console.log(authenticated)
 
     const logout = async () => {
         auth.signOut();

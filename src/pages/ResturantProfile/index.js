@@ -5,26 +5,17 @@ import "./style.css"
 import { Modal } from 'antd'
 import { TextField, InputLabel, Select, MenuItem, FormControl, IconButton, Button } from '@mui/material'
 
-import { getDocs, storage, ref, uploadBytes, getDownloadURL, swal, doc, db, setDoc, DocRef, collection } from '../../config/firebase'
+import { getDocs, storage, ref, uploadBytes, getDownloadURL, swal, doc, db, setDoc, deleteDoc, DocRef, collection } from '../../config/firebase'
 import { useSelector } from 'react-redux'
+import Swal from 'sweetalert2'
 
 import ItemCard from './../../components/ItemCard'
 
 const Index = () => {
     const userData = useSelector(state => state.myAuth)
-    const [items,setItems] = useState([])
-    useEffect(() => {
-        const gettingMyResturantItems = async () => {
-            const querySnapshot = await getDocs(collection(db, "Resturants", `${userData.currentUser.uid}`, "myResturantItems"))
-            const myResturantItems = []
-            querySnapshot.forEach((doc) => {
-                myResturantItems.push({ id: doc.id, ...doc.data() })
-            })
-            setItems(myResturantItems)
+    const [items, setItems] = useState([])
 
-        }
-        gettingMyResturantItems()
-    }, [])
+
 
 
     // For Modal
@@ -64,20 +55,66 @@ const Index = () => {
         const itemDescription = document.getElementById("itemDescription").value
         const itemServingSize = document.getElementById("itemServingSize").value
         const itemCategory = category
+
         if (!document.getElementById("itemImage").files[0]) {
             swal("Select Image to Create Item.")
             return
         }
-        const itemImage = await uploadImage(document.getElementById("itemImage").files[0])
 
+        const itemImage = await uploadImage(document.getElementById("itemImage").files[0])
         const returantItem = { itemName, itemPrice, itemDescription, itemServingSize, itemCategory, itemImage }
+        for (let a in returantItem) {
+            if (returantItem[a].length === 0) {
+                swal('Please fill all Inputs!')
+                return
+            }
+        }
         const itemId = userData.currentUser.uid + Date.now()
         const myItemRef = doc(db, "Resturants", `${userData.currentUser.uid}`, "myResturantItems", `${itemId}`);
         await setDoc(myItemRef, returantItem);
         console.log(itemName, itemPrice, itemDescription, itemServingSize, itemCategory, itemImage)
-        alert("send")
+        Swal.fire({
+            title: 'Item added in your resturant successfully.',
+            width: 600,
+            padding: '3em',
+            color: '#e21b70',
+            backdrop: `
+            #ffeaf2
+            left top
+            no-repeat
+            `
+        })
     }
 
+
+
+
+    const deleteItem = async (itemId) => {
+        const docRef = doc(db, "Resturants", `${userData.currentUser.uid}`, "myResturantItems", `${itemId}`);
+        await deleteDoc(docRef)
+        swal("Item Deleted Successfully")
+    }
+
+    // code for edit created item
+    let [itemIdToEdit, setItemIdToEdit] = useState('')
+    const editItem = (itemId) => {
+
+    }
+
+
+
+
+    useEffect(() => {
+        const gettingMyResturantItems = async () => {
+            const querySnapshot = await getDocs(collection(db, "Resturants", `${userData.currentUser.uid}`, "myResturantItems"))
+            const myResturantItems = []
+            querySnapshot.forEach((doc) => {
+                myResturantItems.push({ id: doc.id, ...doc.data() })
+            })
+            setItems(myResturantItems)
+        }
+        gettingMyResturantItems()
+    }, [createItem])
 
 
 
@@ -90,15 +127,15 @@ const Index = () => {
                 <h1>Add Items In Your Resturant </h1>
                 <button className='addItemBtn' onClick={showModal}>Add Item</button>
             </div>
+
+
             <div className="myResturantItems">
-            {items.map((item,index)=>{
-                return <ItemCard key={index} itemDetails = {item}/>
-            })}
-                {/* <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard /> */}
+                {items.length > 0 ? items.map((item, index) => {
+                    return <ItemCard key={index} itemDetails={item} delete={deleteItem} showModal={showModal} />
+                }) : <h1 style={{ fontFamily: "fantasy", wordSpacing: "0.4em", letterSpacing: "0.1em", textAlign: "center" }}>No Items Added</h1>
+                }
             </div>
+
 
 
             {/* Ant design Add Item Modal */}
@@ -154,6 +191,9 @@ const Index = () => {
                 <button className="createItemBtn mt-4" onClick={createItem}>Create Item</button>
             </Modal>
 
+
+
+            {/* Modal for Edit */}
 
 
         </div>

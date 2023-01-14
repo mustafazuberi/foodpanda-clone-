@@ -20,7 +20,8 @@ import {
     onAuthStateChanged,
     FacebookAuthProvider,
     signInWithEmailAndPassword,
-    createUserWithEmailAndPassword
+    createUserWithEmailAndPassword,
+    
 } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
 import {
     getFirestore,
@@ -28,7 +29,7 @@ import {
     setDoc,
     addDoc,
     collection,
-    onSnapshot, where, query, getDoc, getDocs,DocRef
+    onSnapshot, where, query, getDoc, getDocs,DocRef,deleteDoc
 } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-storage.js"
 
@@ -134,7 +135,8 @@ export {
     createUserWithEmailAndPassword,
     addUserToDBSignup,
     signInWithEmailAndPassword,
-    DocRef
+    DocRef,
+    deleteDoc
 
 }
 
