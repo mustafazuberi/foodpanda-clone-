@@ -5,10 +5,11 @@ import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import AppAndOffice from '../../components/AppAndOffice'
 import test from './home-bg.jpg'
-
+import { useNavigate } from 'react-router-dom'
 import { doc, getDoc, db, getDocs, collection } from './../../config/firebase'
 
 const Home = () => {
+  const navigate = useNavigate()
   const userData = useSelector(state => state.myAuth)
   console.log(userData)
   console.log(useSelector(state => state.myAuthLoggined))
@@ -49,7 +50,7 @@ const Home = () => {
   }, [])
 
   const resturantsToDisplay = resturantsFromRedux.map((item, index) => {
-    return <div className="resturantItem" key={index} >
+    return <div className="resturantItem" key={index} onClick={()=> navigate(`/ResturantDetails/${item.id}`)}>
       <div className="resturantImageDiv"><img src={item.restImage} alt="" /></div>
       <div className="resturantName">{item.restName}
         <i className="far fa-heart" onClick={toggleStar} style={{ color: "#e21b70", fontSize: "22px", cursor: "pointer" }}></i>
