@@ -95,11 +95,11 @@ const Index = () => {
         swal("Item Deleted Successfully")
     }
 
-    // code for edit created item
-    let [itemIdToEdit, setItemIdToEdit] = useState('')
-    const editItem = (itemId) => {
+    // // code for edit created item
+    // let [itemIdToEdit, setItemIdToEdit] = useState('')
+    // const editItem = (itemId) => {
 
-    }
+    // }
 
 
 

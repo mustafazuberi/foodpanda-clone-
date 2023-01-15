@@ -1,0 +1,53 @@
+.updateInpDivs {
+    margin-top: 60px;
+    margin-left: 60px;
+}
+.pencilIcons{
+    color: white;
+}
+.pencilDiv{
+    background-color: #ff66a8;
+    display: inline-block;
+    border-radius: 10px;
+    padding: 5px;
+}
+.restImageDivProfile{
+    width: 100%;
+    height: 250px;
+}
+.updateImageDiv{
+    display: flex;
+    width: 300px;
+    height: 340px;
+
+    justify-content: space-between  ;
+    flex-direction: column;
+}
+.profUpdateDiv{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+@media only screen and (max-width:400px){
+    .updateImageDiv{
+        width: 250px;
+        height: 250px;
+    }
+}
+@media only screen and (max-width:350px){
+    .updateImageDiv{
+        width: 200px;
+        height: 250px;
+    }
+}
+.pencilDiv{
+    border: none;
+    outline :none;
+}
+/* #e21b70 */
+
+
+.btnPink{
+    background-color: #f81075;
+}

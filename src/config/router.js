@@ -5,6 +5,7 @@ import LoginUser from '../pages/LoginUser'
 import LoginUserForm from '../pages/LoginUserForm'
 import SignupUserForm from '../pages/SignupUserForm'
 import ResturantProfile from '../pages/ResturantProfile'
+import ResturantProfileDetails from '../pages/ResturantProfileDetails'
 
 
 import {
@@ -39,6 +40,10 @@ const Router = () => {
     {
       path: "/resturantMyProfile",
       element: <ResturantProfile />
+    },
+    {
+      path: "/ResturantProfileDetails",
+      element: <ResturantProfileDetails />
     }
   ]);
   return (

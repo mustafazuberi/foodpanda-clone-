@@ -16,13 +16,14 @@ import actionCreators from "./../state/index"
 const Navbar = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { authData, isAuthenticatedData, sendResturantExists } = bindActionCreators(actionCreators, dispatch)
+    const { authData, isAuthenticatedData, sendResturantExists} = bindActionCreators(actionCreators, dispatch)
 
     const userData = useSelector(state => state.myAuth)
     // console.log(userData)
     const authenticated = useSelector(state => state.myAuthLoggined)
+    const isResturant = useSelector(state => state.myIsResturants)
 
-    // console.log(authenticated)
+    // console.log("isResturant>>",isResturant)
 
     const logout = async () => {
         auth.signOut();
@@ -63,7 +64,8 @@ const Navbar = () => {
                     {/* authData.currentUser.displayName || authData.currentUser.displayName */}
                     <div className="dropdown-menu profieDropdownopt" aria-labelledby="dropdownMenuLink">
 
-                        <a className="dropdown-item py-2 px-5 ">Settings</a   >
+                        <a className={isResturant ? "dropdown-item py-2 px-5" : "dropdown-item py-2 px-5 d-none"} onClick={()=>navigate('/ResturantProfileDetails')}>Profile</a>
+                        <a className="dropdown-item py-2 px-5 ">Settings</a>
                         <a className="dropdown-item py-2 px-5 " onClick={logout} >Logout</a>
                     </div>
                 </div>
