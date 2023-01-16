@@ -4,8 +4,11 @@ import FooterResturant from '../../components/FooterResturant';
 
 import CreateRoundedIcon from '@mui/icons-material/CreateRounded';
 import { TextField, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import { getDoc, doc, db, setDoc, swal ,ref,storage,getDownloadURL,uploadBytes} from '../../config/firebase';
+import { getDoc, doc, db, setDoc, swal, ref, storage, getDownloadURL, uploadBytes } from '../../config/firebase';
 import { useSelector } from 'react-redux';
+
+import ScrollToTop from "react-scroll-to-top";
+
 import "./style.css"
 
 const Index = () => {
@@ -19,7 +22,7 @@ const Index = () => {
         const snapshot = await uploadBytes(storageRef, image)
         const url = await getDownloadURL(snapshot.ref)
         return url
-      }
+    }
     const [restName, setRestName] = useState("")
     const [restPhoneNumber, setRestPhoneNumber] = useState("")
     const [restDeliveryCharges, setRestDeliveryCharges] = useState("")
@@ -72,13 +75,15 @@ const Index = () => {
 
 
 
-    const imageHandler = async () =>{
+    const imageHandler = async (e) => {
         setImageUpdateBtn(false)
-    }
-    const updateImage = async(e) =>{
-        const url = await uploadImage(document.getElementById("imageToUpdate").files[0])
-        const docRef = doc(db, "Resturants", `${userData.currentUser.uid}`)
+        const url = await uploadImage(e.target.files[0])
+
         setRestImage(url)
+
+    }
+    const updateImage = async (e) => {
+        const docRef = doc(db, "Resturants", `${userData.currentUser.uid}`)
         await setDoc(docRef, { ...restObj, restImage })
         swal("Image Updated Successfully")
     }
@@ -108,6 +113,7 @@ const Index = () => {
     }
 
 
+   
 
     return (
         <>

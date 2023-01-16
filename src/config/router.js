@@ -14,8 +14,12 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
+import { useSelector } from 'react-redux'
+
 const Router = () => {
 
+
+  const authenticated = useSelector(state => state.myAuthLoggined)
 
   const router = createBrowserRouter([
     {
