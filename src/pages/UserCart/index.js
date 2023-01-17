@@ -21,7 +21,7 @@ const Index = () => {
     }, [])
     console.log(userCartItems)
 
-    
+
 
 
 
@@ -65,6 +65,18 @@ const Index = () => {
                         aria-controls="ex3-tabs-3"
                         aria-selected="false"
                     >Delivered</a
+                    >
+                </li>
+                <li className="nav-item" role="presentation">
+                    <a
+                        className="nav-link"
+                        id="ex4-tab-4"
+                        data-mdb-toggle="tab"
+                        href="#ex4-tabs-4"
+                        role="tab"
+                        aria-controls="ex4-tabs-4"
+                        aria-selected="false"
+                    >Rejected</a
                     >
                 </li>
             </ul>
@@ -135,7 +147,37 @@ const Index = () => {
                 >
                     {userCartItems.map((item, index) => {
                         let orders = item.userOrder
-                        if (item.status === 'delivered') {
+                        if (item.status === 'deliver') {
+                            // console.log(orders)
+                            return <div key={index} style={{ padding: "10px 0px 0px 70px" }}>
+                                <h5 style={{ color: "black", textDecoration: "underLine" }}>ORDER # {index + 1}</h5>
+                                <h5 style={{ color: "#d12b73" }}>ITEMS</h5>
+                                {
+                                    orders.map((e, index) => {
+                                        return <h6 key={index}>{index + 1 + ") " + e.itemName + "  " + `(Rs : ${e.itemPrice})`}</h6>
+                                    })
+                                }
+                                <h6><span style={{ color: "#d12b73" }}>Time</span> : {item.now.time}</h6>
+                                <h6><span style={{ color: "#d12b73" }}>Date</span> : {item.now.data}</h6>
+                                <div style={{ padding: "5px", borderTop: "1px solid grey", display: "inline-block", marginTop: "10px" }}>
+                                    Total Price : <h6 style={{ display: "inline", color: "black" }}>Rs {item.orderPrice}</h6>
+                                </div>
+                                <hr />
+                            </div>
+
+                        }
+                    })}
+                </div>
+
+                <div
+                    className="tab-pane fade"
+                    id="ex4-tabs-4"
+                    role="tabpanel"
+                    aria-labelledby="ex4-tab-4"
+                >
+                    {userCartItems.map((item, index) => {
+                        let orders = item.userOrder
+                        if (item.status === 'rejected') {
                             // console.log(orders)
                             return <div key={index} style={{ padding: "10px 0px 0px 70px" }}>
                                 <h5 style={{ color: "black", textDecoration: "underLine" }}>ORDER # {index + 1}</h5>

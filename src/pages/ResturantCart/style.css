@@ -1,0 +1,76 @@
+.acceptBtn {
+    color: white;
+    background-color: green;
+    border-radius: 6px;
+    padding: 5px 15px 5px 15px;
+    cursor: alias;
+    border: none;
+    outline: none;
+}
+.rejectBtn {
+    color: white;
+    background-color: red;
+    border-radius: 6px;
+    padding: 5px 15px 5px 15px;
+    cursor: alias;
+    border: none;
+    outline: none;
+    margin-left: 20px;
+}
+
+.resturantOrder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 100px;
+    border-bottom: 1px solid grey;
+    padding-bottom: 30px;
+}
+
+.customerDetail h4 {
+    color: black;
+    font-size: 20px;
+}
+
+.pnk {
+    color: #d12b73;
+}
+
+.map {
+    border-radius: 10px;
+}
+
+
+@media only screen and (max-width: 788px) {
+    .resturantOrder {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        margin-bottom: 100px;
+        border-bottom: 1px solid grey;
+        padding-bottom: 30px;
+    }
+
+    .customerDetail {
+        padding-left: 70px;
+    }
+
+    .map {
+        width: 300px;
+    }
+}
+
+
+
+
+@media only screen and (max-width: 368px) {
+    .map {
+        width: 250px;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .map {
+        width: 200px;
+    }
+}

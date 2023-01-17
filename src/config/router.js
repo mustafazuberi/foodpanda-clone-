@@ -22,6 +22,7 @@ const Router = () => {
 
 
   const authenticated = useSelector(state => state.myAuthLoggined)
+  const isResturant = useSelector(state => state.myIsResturants)
 
   const router = createBrowserRouter([
     {
@@ -74,3 +75,9 @@ const Router = () => {
 }
 
 export default Router
+
+
+
+
+
+// element: isResturant ? <ResturantProfile /> : < LoginUserForm />
