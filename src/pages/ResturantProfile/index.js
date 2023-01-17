@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar'
+import FooterResturant from '../../components/FooterResturant'
+
 import "./style.css"
 
 import { Modal } from 'antd'
@@ -194,8 +196,8 @@ const Index = () => {
 
 
             {/* Modal for Edit */}
-
-
+            <br /><br /><br /><br /><br /><br />
+            <FooterResturant />
         </div>
     )
 }

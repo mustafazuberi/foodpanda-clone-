@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { doc, db, getDoc, getDocs, collection, swal } from '../../config/firebase'
+import { doc, db, getDoc, getDocs, collection, swal, setDoc } from '../../config/firebase'
 import Navbar from '../../components/Navbar'
 import FooterResturant from '../../components/FooterResturant'
 import "./style.css"
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Modal } from 'antd'
+import { TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
 
 import { useDispatch } from 'react-redux'
@@ -16,9 +17,11 @@ import actionCreators from "./../../state/index"
 import { useSelector } from 'react-redux'
 
 const Index = () => {
-    const dispatch = useDispatch()
+    const userData = useSelector(state => state.myAuth)
+
+    // const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { sendUserDashboardItems } = bindActionCreators(actionCreators, dispatch)
+
     // For Modal
     const [open, setOpen] = useState(false);
     const showModal = () => {
@@ -95,11 +98,72 @@ const Index = () => {
 
     const [userLocation, setUserLocation] = useState('')
     const [dashboardItems, setDashboardItems] = useState([])
+    const [userDashboardTotal, setUserDashboardTotal] = useState(0)
+    const [paymentMethod, setPaymentMethod] = useState("")
+    const [orderName, setOrderName] = useState('')
+    const [orderPhone, setOrderPhone] = useState('')
+
+
     const addToDashboard = (item) => {
         setDashboardItems([...dashboardItems, item])
+        setUserDashboardTotal(userDashboardTotal + (+item.itemPrice))
+        swal("Added To Dashboard")
     }
+    const deleteFromDashboard = (item) => {
+        setDashboardItems(dashboardItems.filter((e) => e.id != item.id))
+        setUserDashboardTotal(userDashboardTotal - (+item.itemPrice))
+    }
+    const handlePaymentMethod = (e) => {
+        setPaymentMethod(e.target.value)
+    }
+    const handleOrderName = (e) => {
+        setOrderName(e.target.value)
+    }
+    const handleOrderPhone = (e) => {
+        setOrderPhone(e.target.value)
+    }
+    const placeOrder = async () => {
+        //    validating
+        if (orderName.length == 0) {
+            swal("Enter Name Please")
+            return
+        }
+        if (orderPhone.length < 11 || orderPhone.length > 11) {
+            swal("Phone number digits should be 11")
+            return
+        }
+        if (paymentMethod.length == 0) {
+            swal("Select Payment Pethod please.")
+            return
+        }
+        if (dashboardItems.length == 0) {
+            swal("No items selected to place order. Please Select Items")
+            return
+        }
+        ////////////////////////////////
+        const dashboardItem = {
+            userId: userData.currentUser.uid,
+            userEmail: userData.currentUser.email,
+            userName: orderName,
+            userPhone: orderPhone,
+            status: "pending",
+            now: { time: new Date().toTimeString(), data: new Date().toDateString() },
+            paymentMethod: paymentMethod,
+            userLocation: userLocation,
+            userOrder: [...dashboardItems],
+            orderPrice: userDashboardTotal
+        }
+        // saving in resturant dashboard
+        const itemId = userData.currentUser.uid + Date.now()
+        const dashboardItemRef = doc(db, "Resturants", `${detailRestId}`, "DashboardItems", `${itemId}`);
+        await setDoc(dashboardItemRef, dashboardItem);
 
+        // saving in user dashboard
+        const userDashboardRef = doc(db, "users", `${userData.currentUser.uid}`, "DashboardItems", `${itemId}`);
+        await setDoc(userDashboardRef, dashboardItem);
 
+        swal("Order Placed Successfully.")
+    }
 
 
 
@@ -116,10 +180,11 @@ const Index = () => {
             </div>
 
             <div className="dashBtn"><button onClick={showModal}>Dashboard</button></div>
+            <h2 className='restHeading'>{restDetail.restName} <span>Items</span></h2>
 
             <div className="allItems">
                 {
-                    resturantItems.map((item, index) => {
+                    resturantItems.length > 0 ? resturantItems.map((item, index) => {
                         return <div className="item" key={index}>
                             <div className="itemImg"><img src={item.itemImage} alt="" /></div>
                             <div className="itemDetail">
@@ -133,10 +198,14 @@ const Index = () => {
                                 <LocalHospitalIcon style={{ color: "#d12b73", fontSize: "35px", cursor: "pointer" }} onClick={() => addToDashboard(item)} />
                             </div>
                         </div>
-                    })
+                    }) : <h2 style={{ paddingTop: "30px" }}>No Items Added By owner</h2>
                 }
 
             </div>
+
+
+
+
 
 
 
@@ -153,25 +222,53 @@ const Index = () => {
                 cancelButtonProps={{ disabled: true, className: 'd-none' }}
             >
                 {
-                    dashboardItems.map((item, index) => {
+                    dashboardItems.length > 0 ? dashboardItems.map((item, index) => {
                         return <div className="dashBoardItem" key={index}>
                             <div className="name">
-                                <h6 style={{color:"#d12b73"}}>{item.itemName}</h6>
+                                <h6 style={{ color: "#d12b73" }}>{item.itemName}</h6>
                                 <h6>$${item.itemCategory}</h6>
                             </div>
                             <div className="price">
                                 <h6>Rs {item.itemPrice}</h6>
-                                <h6><DeleteIcon/></h6>
+                                <h6><DeleteIcon style={{ cursor: "pointer" }} onClick={() => deleteFromDashboard(item)} /></h6>
                             </div>
 
                         </div>
-                    })
+                    }) : <h5 style={{ paddingTop: "20px" }}>No items added</h5>
+
                 }
+                <br /><br />
+
+                <h6 style={{ float: "right", marginRight: "30px", marginTop: "10px" }}>Total Price : Rs {userDashboardTotal}</h6>
+
+
+                <div className="orderFormDiv">
+                    <TextField size='small' label="Enter Your Name" value={orderName} onChange={handleOrderName} type="name" variant="outlined" />
+                </div>
+                <div className="orderFormDiv">
+                    <TextField size='small' label="Enter Your Phone Number" value={orderPhone} onChange={handleOrderPhone} type="number" variant="outlined" />
+                </div>
+                <div className="orderFormDiv">
+                    <FormControl style={{ width: "210px" }} size='small'>
+                        <InputLabel >Payment Method</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="restCountry"
+                            value={paymentMethod}
+                            name='Country'
+                            label="Country"
+                            onChange={handlePaymentMethod}
+                        >
+                            <MenuItem value={'On Delivery'}>On Delivery</MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
+
+                <button className="order my-3" onClick={placeOrder} >Place Order</button>
+
             </Modal>
 
-
-
-            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            <br /><br /><br /><br />
             <FooterResturant />
         </>
     )

@@ -1,6 +1,6 @@
-.resturantNameHeading h1 {
+.restHeading {
     font-family: 'boldFont';
-    font-size: 65px;
+    font-size: 45px;
     font-weight: 900;
     color: black;
     text-align: center;
@@ -8,14 +8,16 @@
     text-shadow: 0 2px 1px #d12b73,
         -1px 3px 1px #d12b73,
         -2px 5px 1px #d12b73;
+
+    margin-top: 15px;
 }
 
-.resturantNameHeading h1 span {
+.restHeading span {
     color: black;
     text-shadow: 0 2px 1px black,
         -1px 3px 1px black,
         -2px 5px 1px black;
-    text-decoration: underline;
+    /* text-decoration: underline; */
 }
 
 
@@ -119,6 +121,7 @@ p {
 .dashBtn {
     float: right;
     margin-right: 100px;
+    margin-top: 12px;
 }
 
 .dashBtn button {
@@ -130,7 +133,12 @@ p {
     border-radius: 8px;
     margin-top: 10px;
 }
+@media only screen and (max-width: 625px){
+    .dashBtn{
+        margin-right: 10px;
 
+    }
+}
 .dashBoardItem {
     display: flex;
     flex-direction: row;
@@ -143,4 +151,17 @@ p {
     padding-left: 15px;
     padding-right: 15px;
 
+}
+
+.order {
+    background-color: #d12b73;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.orderFormDiv {
+    margin-top: 20px;
 }

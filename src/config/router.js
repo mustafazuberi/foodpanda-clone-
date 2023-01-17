@@ -7,6 +7,8 @@ import SignupUserForm from '../pages/SignupUserForm'
 import ResturantProfile from '../pages/ResturantProfile'
 import ResturantProfileDetails from '../pages/ResturantProfileDetails'
 import ResturantDetails from '../pages/ResturantDetails'
+import UserCart from "../pages/UserCart"
+import ResturantCart from "../pages/ResturantCart"
 
 
 import {
@@ -54,6 +56,14 @@ const Router = () => {
       path: "/ResturantDetails/:detailRestId",
       element: <ResturantDetails />
     },
+    {
+      path: "/userCart",
+      element: <UserCart />
+    },
+    {
+      path: "/resturantCart",
+      element: <ResturantCart />
+    }
   ]);
   return (
     <div>

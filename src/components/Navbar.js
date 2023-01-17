@@ -16,7 +16,7 @@ import actionCreators from "./../state/index"
 const Navbar = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { authData, isAuthenticatedData, sendResturantExists} = bindActionCreators(actionCreators, dispatch)
+    const { authData, isAuthenticatedData, sendResturantExists } = bindActionCreators(actionCreators, dispatch)
 
     const userData = useSelector(state => state.myAuth)
     // console.log(userData)
@@ -64,13 +64,13 @@ const Navbar = () => {
                     {/* authData.currentUser.displayName || authData.currentUser.displayName */}
                     <div className="dropdown-menu profieDropdownopt" aria-labelledby="dropdownMenuLink">
 
-                        <a className={isResturant ? "dropdown-item py-2 px-5" : "dropdown-item py-2 px-5 d-none"} onClick={()=>navigate('/ResturantProfileDetails')}>Profile</a>
+                        <a className={isResturant ? "dropdown-item py-2 px-5" : "dropdown-item py-2 px-5 d-none"} onClick={() => navigate('/ResturantProfileDetails')}>Profile</a>
                         <a className="dropdown-item py-2 px-5 ">Settings</a>
                         <a className="dropdown-item py-2 px-5 " onClick={logout} >Logout</a>
                     </div>
                 </div>
 
-                <div className="CartBtn"><i className="fas fa-shopping-basket"></i></div>
+                <div className="CartBtn"><i className="fas fa-shopping-basket" onClick={() => isResturant ? navigate('/resturantCart') : navigate('/userCart')}></i></div>
             </div>
         </div>
     )
