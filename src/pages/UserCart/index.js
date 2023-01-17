@@ -143,6 +143,7 @@ const Index = () => {
                     className="tab-pane fade"
                     id="ex3-tabs-3"
                     role="tabpanel"
+                    
                     aria-labelledby="ex3-tab-3"
                 >
                     {userCartItems.map((item, index) => {

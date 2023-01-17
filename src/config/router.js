@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Home from '../pages/Home'
 import SignupResturant from '../pages/SignupResturant'
 import LoginUser from '../pages/LoginUser'
@@ -22,48 +22,64 @@ const Router = () => {
 
 
   const authenticated = useSelector(state => state.myAuthLoggined)
+  console.log(authenticated)
   const isResturant = useSelector(state => state.myIsResturants)
+
+  const [accType, setAccType] = useState("nothing")
+  const [accHome, setAccHome] = useState('')
+  useEffect(() => {
+    if (isResturant == true) {
+      setAccType('resturant')
+      setAccHome(<ResturantProfile />)
+    } else if (authenticated == true && isResturant == false) {
+      setAccType('user')
+      setAccHome(<Home />)
+    }
+  }, [])
 
   const router = createBrowserRouter([
     {
       path: "/home",
-      element: <Home />,
+      element: accType === 'user' ? <Home /> : <LoginUser />,
     },
     {
       path: "/SignupResturant",
-      element: <SignupResturant />,
+      element: accType === 'nothing' ? <SignupResturant /> : accHome,
     },
     {
       path: "/",
-      element: <LoginUser />,
+      element: accType === 'nothing' ? <LoginUser /> : accHome,
     },
     {
       path: "/loginWithEmail",
-      element: <LoginUserForm />,
+      element: accType === 'nothing' ? <LoginUserForm /> : accHome,
     },
     {
       path: "/signupWithEmail",
-      element: <SignupUserForm />,
+      element: accType === 'nothing' ? <SignupUserForm /> : accHome,
     },
     {
       path: "/resturantMyProfile",
-      element: <ResturantProfile />
+      // element: <ResturantProfile />
+      element: isResturant ? <ResturantProfile /> : < LoginUserForm />
+
     },
     {
       path: "/ResturantProfileDetails",
-      element: <ResturantProfileDetails />
+      // element: <ResturantProfileDetails />
+      element: isResturant ? <ResturantProfileDetails /> : < LoginUserForm />
     },
     {
       path: "/ResturantDetails/:detailRestId",
-      element: <ResturantDetails />
+      element: accType === 'user' ? <ResturantDetails /> : <LoginUserForm />
     },
     {
       path: "/userCart",
-      element: <UserCart />
+      element: accType === 'user' ? <UserCart /> : accHome,
     },
     {
       path: "/resturantCart",
-      element: <ResturantCart />
+      element: isResturant ? <ResturantCart /> : < LoginUserForm />
     }
   ]);
   return (
