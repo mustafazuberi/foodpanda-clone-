@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import { Modal } from 'antd'
 import { TextField, InputLabel, Select, MenuItem, FormControl } from '@mui/material'
 
-import image from "./partner-bg.png"
+// import image from "./partner-bg.png"
 import { doc, db, deleteDoc, swal, getDocs, collection, getDoc, setDoc } from "./../config/firebase"
 import { useSelector } from 'react-redux';
 import items from './../pages/SignupResturant'

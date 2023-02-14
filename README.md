@@ -17,3 +17,8 @@ I developed this web-application using ReactJS, Redux , Firebase and some librar
 5) You can also delete or edit your resturant items.
 6) You can watch your available orders from cart.
 5) You can accept deliver or rejcet order.
+
+
+
+
+Project URL : https://foodpanda-clone-mrzuberi.netlify.app/

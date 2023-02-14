@@ -10,17 +10,13 @@ import { Modal } from 'antd'
 import { TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
 
-import { useDispatch } from 'react-redux'
-import { useNavigate } from "react-router-dom";
-import { bindActionCreators } from 'redux'
-import actionCreators from "./../../state/index"
+
 import { useSelector } from 'react-redux'
 
 const Index = () => {
     const userData = useSelector(state => state.myAuth)
 
-    // const dispatch = useDispatch()
-    const navigate = useNavigate()
+
 
     // For Modal
     const [open, setOpen] = useState(false);
@@ -29,7 +25,7 @@ const Index = () => {
         getLocation()
     };
     const handleOk = (e) => {
-        console.log(e);
+        // console.log(e);
         setOpen(false);
     };
     const handleCancel = (e) => {
@@ -51,12 +47,12 @@ const Index = () => {
         setUserLocation({ lat: position.coords.latitude, long: position.coords.longitude })
     }
     const showError = (error) => {
-        if (error.code == error.PERMISSION_DENIED) {
+        if (error.code === error.PERMISSION_DENIED) {
             console.log(error.message);
             swal("Sorry! We cannnot place order , Allow accessing your location to continue");
             setOpen(false);
 
-        } else if (error.code == error.POSITION_UNAVAILABLE) {
+        } else if (error.code === error.POSITION_UNAVAILABLE) {
             swal("Order Not Place", "Position Unavailable", "error");
             setOpen(false);
         }
@@ -103,15 +99,16 @@ const Index = () => {
     const [orderName, setOrderName] = useState('')
     const [orderPhone, setOrderPhone] = useState('')
 
+    console.log(dashboardItems)
 
-    const addToDashboard = (item) => {
+    const addToDashboard = (item, index) => {
         setDashboardItems([...dashboardItems, item])
         setUserDashboardTotal(userDashboardTotal + (+item.itemPrice))
         swal("Added To Dashboard")
     }
     const deleteFromDashboard = (item) => {
-        setDashboardItems(dashboardItems.filter((e) => e.id != item.id))
-        setUserDashboardTotal(userDashboardTotal - (+item.itemPrice))
+        setDashboardItems([])
+        setUserDashboardTotal(0)
     }
     const handlePaymentMethod = (e) => {
         setPaymentMethod(e.target.value)
@@ -124,7 +121,7 @@ const Index = () => {
     }
     const placeOrder = async () => {
         //    validating
-        if (orderName.length == 0) {
+        if (orderName.length === 0) {
             swal("Enter Name Please")
             return
         }
@@ -132,11 +129,11 @@ const Index = () => {
             swal("Phone number digits should be 11")
             return
         }
-        if (paymentMethod.length == 0) {
+        if (paymentMethod.length === 0) {
             swal("Select Payment Pethod please.")
             return
         }
-        if (dashboardItems.length == 0) {
+        if (dashboardItems.length === 0) {
             swal("No items selected to place order. Please Select Items")
             return
         }
@@ -221,6 +218,8 @@ const Index = () => {
                 okButtonProps={{ disabled: false, className: 'd-none' }}
                 cancelButtonProps={{ disabled: true, className: 'd-none' }}
             >
+                <h6 style={{ textAlign: "right", color: "#d12b73" }}><DeleteIcon style={{ cursor: "pointer" }} onClick={() => deleteFromDashboard()} /></h6>
+
                 {
                     dashboardItems.length > 0 ? dashboardItems.map((item, index) => {
                         return <div className="dashBoardItem" key={index}>
@@ -230,7 +229,6 @@ const Index = () => {
                             </div>
                             <div className="price">
                                 <h6>Rs {item.itemPrice}</h6>
-                                <h6><DeleteIcon style={{ cursor: "pointer" }} onClick={() => deleteFromDashboard(item)} /></h6>
                             </div>
 
                         </div>

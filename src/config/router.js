@@ -22,60 +22,55 @@ const Router = () => {
 
 
   const authenticated = useSelector(state => state.myAuthLoggined)
-  console.log(authenticated)
   const isResturant = useSelector(state => state.myIsResturants)
 
-  const [accType, setAccType] = useState("nothing")
   const [accHome, setAccHome] = useState('')
   useEffect(() => {
-    if (isResturant == true) {
-      setAccType('resturant')
+    if (isResturant) {
       setAccHome(<ResturantProfile />)
-    } else if (authenticated == true && isResturant == false) {
-      setAccType('user')
+    } else {
       setAccHome(<Home />)
     }
+
   }, [])
 
   const router = createBrowserRouter([
     {
       path: "/home",
-      element: accType === 'user' ? <Home /> : <LoginUser />,
+      element: authenticated ? <Home /> : <LoginUser />,
     },
     {
       path: "/SignupResturant",
-      element: accType === 'nothing' ? <SignupResturant /> : accHome,
+      element: !isResturant && !authenticated ? <SignupResturant /> : accHome,
     },
     {
       path: "/",
-      element: accType === 'nothing' ? <LoginUser /> : accHome,
+      element: !isResturant && !authenticated ? <LoginUser /> : accHome,
     },
     {
       path: "/loginWithEmail",
-      element: accType === 'nothing' ? <LoginUserForm /> : accHome,
+      element: <LoginUserForm />,
     },
     {
       path: "/signupWithEmail",
-      element: accType === 'nothing' ? <SignupUserForm /> : accHome,
+      element: <SignupUserForm />,
     },
     {
       path: "/resturantMyProfile",
-      // element: <ResturantProfile />
       element: isResturant ? <ResturantProfile /> : < LoginUserForm />
 
     },
     {
       path: "/ResturantProfileDetails",
-      // element: <ResturantProfileDetails />
       element: isResturant ? <ResturantProfileDetails /> : < LoginUserForm />
     },
     {
       path: "/ResturantDetails/:detailRestId",
-      element: accType === 'user' ? <ResturantDetails /> : <LoginUserForm />
+      element: authenticated && !isResturant ? <ResturantDetails /> : <LoginUserForm />
     },
     {
       path: "/userCart",
-      element: accType === 'user' ? <UserCart /> : accHome,
+      element: authenticated && !isResturant ? <UserCart /> : accHome,
     },
     {
       path: "/resturantCart",
@@ -96,4 +91,3 @@ export default Router
 
 
 
-// element: isResturant ? <ResturantProfile /> : < LoginUserForm />

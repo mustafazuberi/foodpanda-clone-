@@ -12,7 +12,6 @@ const Home = () => {
 
   const navigate = useNavigate()
   const userData = useSelector(state => state.myAuth)
-  console.log(userData)
   console.log(useSelector(state => state.myAuthLoggined))
 
   const resturantsFromRedux = useSelector(state => state.myResturants)

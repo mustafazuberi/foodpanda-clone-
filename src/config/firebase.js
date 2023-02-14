@@ -1,15 +1,3 @@
-// Swal.fire({
-//     title: 'Custom width, padding, color, background.',
-//     width: 600,
-//     padding: '3em',
-//     color: '#716add',
-//     background: '#fff url(/images/trees.png)',
-//     backdrop: `
-//       rgba(0,0,123,0.4)
-//       url("/images/nyan-cat.gif")
-//       left top
-//       no-repeat
-//   })
 
 // Firebase
 import swal from "sweetalert";
@@ -21,20 +9,20 @@ import {
     FacebookAuthProvider,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
-    
-} from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
+
+} from "firebase/auth";
 import {
     getFirestore,
     doc,
     setDoc,
     addDoc,
     collection,
-    onSnapshot, where, query, getDoc, getDocs,DocRef,deleteDoc
-} from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-storage.js"
+    onSnapshot, where, query, getDoc, getDocs, deleteDoc
+} from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"
 
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-app.js";
+import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBA3hRw08Z48N3pxt22D6DzmDHZnqh6r-M",
@@ -135,7 +123,6 @@ export {
     createUserWithEmailAndPassword,
     addUserToDBSignup,
     signInWithEmailAndPassword,
-    DocRef,
     deleteDoc
 
 }

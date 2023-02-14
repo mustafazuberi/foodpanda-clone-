@@ -121,8 +121,8 @@ const Footer = () => {
                     </svg>
 
                     <div className="socials">
-                        <FacebookIcon sx={{ fontSize: "40px", marginRight: '10px' ,color:"#898787"}} className="foooterIcons"/>
-                        <InstagramIcon sx={{ fontSize: "40px", marginRLeft: '10px' , color:"#898787" }} className="foooterIcons"/>
+                        <FacebookIcon sx={{ fontSize: "40px", marginRight: '10px', color: "#898787" }} className="foooterIcons" />
+                        <InstagramIcon sx={{ fontSize: "40px", marginRLeft: '10px', color: "#898787" }} className="foooterIcons" />
                     </div>
                 </section>
 
